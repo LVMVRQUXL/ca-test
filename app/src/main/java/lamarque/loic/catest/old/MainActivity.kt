@@ -1,4 +1,4 @@
-package lamarque.loic.catest
+package lamarque.loic.catest.old
 
 import android.content.Context
 import android.content.Intent
@@ -31,10 +31,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import lamarque.loic.catest.data.local.AccountModel
-import lamarque.loic.catest.data.local.BankModel
-import lamarque.loic.catest.ui.BankingViewModel
-import lamarque.loic.catest.ui.theme.CATestTheme
+import lamarque.loic.catest.old.data.local.AccountModel
+import lamarque.loic.catest.old.data.local.BankModel
+import lamarque.loic.catest.old.ui.BankingViewModel
+import lamarque.loic.catest.old.ui.theme.CATestTheme
 
 class MainActivity : ComponentActivity() {
     private val viewModel: BankingViewModel by viewModels {

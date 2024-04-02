@@ -1,4 +1,4 @@
-package lamarque.loic.catest.data.local
+package lamarque.loic.catest.old.data.local
 
 import java.util.Date
 

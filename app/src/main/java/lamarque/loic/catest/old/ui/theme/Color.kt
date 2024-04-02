@@ -1,4 +1,4 @@
-package lamarque.loic.catest.ui.theme
+package lamarque.loic.catest.old.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

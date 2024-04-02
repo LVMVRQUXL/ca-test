@@ -1,4 +1,4 @@
-package lamarque.loic.catest.data.remote
+package lamarque.loic.catest.old.data.remote
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -13,7 +13,7 @@
         android:theme="@style/Theme.CATest"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".old.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.CATest">
@@ -23,8 +23,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AccountDetailsActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".old.AccountDetailsActivity"
+            android:parentActivityName=".old.MainActivity" />
     </application>
 
 </manifest>

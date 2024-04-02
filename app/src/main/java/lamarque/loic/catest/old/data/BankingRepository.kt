@@ -1,13 +1,13 @@
-package lamarque.loic.catest.data
+package lamarque.loic.catest.old.data
 
 import android.content.res.AssetManager
 import kotlinx.serialization.json.Json
-import lamarque.loic.catest.data.local.AccountModel
-import lamarque.loic.catest.data.local.BankModel
-import lamarque.loic.catest.data.local.OperationModel
-import lamarque.loic.catest.data.remote.AccountDto
-import lamarque.loic.catest.data.remote.BanksDto
-import lamarque.loic.catest.data.remote.OperationDto
+import lamarque.loic.catest.old.data.local.AccountModel
+import lamarque.loic.catest.old.data.local.BankModel
+import lamarque.loic.catest.old.data.local.OperationModel
+import lamarque.loic.catest.old.data.remote.AccountDto
+import lamarque.loic.catest.old.data.remote.BanksDto
+import lamarque.loic.catest.old.data.remote.OperationDto
 import java.util.Date
 
 class BankingRepository(private val assets: AssetManager) {

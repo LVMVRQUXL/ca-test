@@ -1,4 +1,4 @@
-package lamarque.loic.catest.ui
+package lamarque.loic.catest.old.ui
 
 import android.content.res.AssetManager
 import androidx.compose.runtime.getValue
@@ -8,9 +8,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import lamarque.loic.catest.data.BankingRepository
-import lamarque.loic.catest.data.local.AccountModel
-import lamarque.loic.catest.data.local.BankModel
+import lamarque.loic.catest.old.data.BankingRepository
+import lamarque.loic.catest.old.data.local.AccountModel
+import lamarque.loic.catest.old.data.local.BankModel
 
 class BankingViewModel(assets: AssetManager) : ViewModel() {
     private val repository: BankingRepository = BankingRepository(assets)
