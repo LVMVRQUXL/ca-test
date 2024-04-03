@@ -11,7 +11,7 @@ import kotlin.test.assertTrue
 
 class BankAccountOperationTest {
     @Test
-    fun `structural operations should pass with the same instance`() {
+    fun `structural equality should pass with the same instance`() {
         val first: Any = BankAccountOperation.from(
             title = "Netflix",
             date = Random.nextLong(),
@@ -23,7 +23,7 @@ class BankAccountOperationTest {
     }
 
     @Test
-    fun `structural operations should pass with another AccountOperation having the same title, date and amount`() {
+    fun `structural equality should pass with another AccountOperation having the same title, date and amount`() {
         val title = "Netflix"
         val date: Long = Random.nextLong()
         val amount: Double = Random.nextDouble()
@@ -34,7 +34,7 @@ class BankAccountOperationTest {
     }
 
     @Test
-    fun `structural operations should fail with null`() {
+    fun `structural equality should fail with null`() {
         val first: Any = BankAccountOperation.from(
             title = "Netflix",
             date = Random.nextLong(),
@@ -46,7 +46,7 @@ class BankAccountOperationTest {
     }
 
     @Test
-    fun `structural operations should fail with an object having another type than AccountOperation`() {
+    fun `structural equality should fail with an object having another type than AccountOperation`() {
         val first: Any = BankAccountOperation.from(
             title = "Netflix",
             date = Random.nextLong(),
@@ -58,7 +58,7 @@ class BankAccountOperationTest {
     }
 
     @Test
-    fun `structural operations should fail with another AccountOperation having another title`() {
+    fun `structural equality should fail with another AccountOperation having another title`() {
         val date: Long = Random.nextLong()
         val amount: Double = Random.nextDouble()
         val first: Any =
@@ -70,7 +70,7 @@ class BankAccountOperationTest {
     }
 
     @Test
-    fun `structural operations should fail with another AccountOperation having another date`() {
+    fun `structural equality should fail with another AccountOperation having another date`() {
         val title = "Netflix"
         val amount: Double = Random.nextDouble()
         val first: Any =
@@ -82,7 +82,7 @@ class BankAccountOperationTest {
     }
 
     @Test
-    fun `structural operations should fail with another AccountOperation having another amount`() {
+    fun `structural equality should fail with another AccountOperation having another amount`() {
         val title = "Netflix"
         val date: Long = Random.nextLong()
         val first: Any =
