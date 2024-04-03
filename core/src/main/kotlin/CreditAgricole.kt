@@ -36,24 +36,29 @@ public class CreditAgricole private constructor(
 
     /** Contains static declarations for the [CreditAgricole] type. */
     public companion object {
+        internal const val BLANK_REGION_ERROR_MESSAGE: String =
+            "Credit Agricole bank's region shouldn't be blank."
+
+        internal const val EMPTY_ACCOUNTS_ERROR_MESSAGE: String =
+            "Credit Agricole bank should have at least one bank account."
+
         /**
          * Creates a bank from the specified [region] and [accounts].
          * Throws an [IllegalArgumentException] if the [region] is blank or if
-         * the list of [accounts] is empty.
+         * the collection of [accounts] is empty.
          */
         public fun from(
             region: String,
             accounts: Set<BankAccount>
         ): CreditAgricole {
-            val validRegion: NotBlankString =
-                requireNotNull(region.toNotBlankString().getOrNull()) {
-                    "Credit Agricole bank's region shouldn't be blank."
-                }
-            val validAccounts: NotEmptySet<BankAccount> =
-                requireNotNull(accounts.toNotEmptySet().getOrNull()) {
-                    "Credit Agricole bank's should have at least one bank " +
-                            "account."
-                }
+            val validRegion: NotBlankString = requireNotNull(
+                region.toNotBlankString().getOrNull(),
+                this::BLANK_REGION_ERROR_MESSAGE
+            )
+            val validAccounts: NotEmptySet<BankAccount> = requireNotNull(
+                accounts.toNotEmptySet().getOrNull(),
+                this::EMPTY_ACCOUNTS_ERROR_MESSAGE
+            )
             return CreditAgricole(validRegion, validAccounts)
         }
     }

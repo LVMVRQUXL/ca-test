@@ -149,20 +149,19 @@ class CreditAgricoleCompanionTest {
             CreditAgricole.from(region, accounts)
         }
         val actual: String? = exception.message
-        val expected = "Credit Agricole bank's region shouldn't be blank."
+        val expected: String = CreditAgricole.BLANK_REGION_ERROR_MESSAGE
         assertEquals(expected, actual)
     }
 
     @Test
-    fun `from should fail with an empty list of accounts`() {
+    fun `from should fail with an empty collection of accounts`() {
         val region = "Languedoc"
         val accounts: Set<BankAccount> = emptySet()
         val exception: IllegalArgumentException = assertFailsWith {
             CreditAgricole.from(region, accounts)
         }
         val actual: String? = exception.message
-        val expected =
-            "Credit Agricole bank's should have at least one bank account."
+        val expected: String = CreditAgricole.EMPTY_ACCOUNTS_ERROR_MESSAGE
         assertEquals(expected, actual)
     }
 }
