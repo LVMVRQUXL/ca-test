@@ -1,9 +1,11 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins { kotlin("jvm") }
 
-kotlin.explicitApi()
+kotlin {
+    explicitApi()
+    jvmToolchain(8)
+}
 
 dependencies {
     implementation(platform(libs.kotlin.bom))
@@ -14,10 +16,7 @@ dependencies {
 
 tasks.withType<KotlinCompile>().configureEach {
     javaPackagePrefix = "lamarque.loic.catest.core"
-    compilerOptions {
-        allWarningsAsErrors.set(true)
-        jvmTarget.set(JvmTarget.JVM_1_8)
-    }
+    compilerOptions.allWarningsAsErrors.set(true)
 }
 
 tasks.test.configure(Test::useJUnitPlatform)
