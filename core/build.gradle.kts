@@ -4,7 +4,7 @@ plugins { kotlin("jvm") }
 
 kotlin {
     explicitApi()
-    jvmToolchain(8)
+    jvmToolchain(17)
 }
 
 dependencies {
