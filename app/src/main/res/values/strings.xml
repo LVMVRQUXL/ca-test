@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">CA Test</string>
+    <string name="my_accounts">Mes Comptes</string>
+    <string name="ca_bank">Crédit Agricole</string>
+    <string name="other_banks">Autres Banques</string>
 </resources>
