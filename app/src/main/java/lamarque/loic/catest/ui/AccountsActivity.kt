@@ -3,11 +3,13 @@ package lamarque.loic.catest.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.KeyboardArrowDown
 import androidx.compose.material.icons.sharp.KeyboardArrowUp
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -31,6 +34,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import lamarque.loic.catest.R
 import lamarque.loic.catest.core.Bank
 import lamarque.loic.catest.core.BankAccount
@@ -41,12 +46,13 @@ import lamarque.loic.catest.core.totalBalanceInEuros
 import lamarque.loic.catest.old.ui.theme.CATestTheme
 
 class AccountsActivity : ComponentActivity() {
+    private val viewModel: AccountsViewModel by viewModels<AccountsViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        lifecycleScope.launch { viewModel.fetchBanks() }
         setContent {
-            CATestTheme {
-                AccountsScreen(viewModel = accountViewModelPreview())
-            }
+            CATestTheme { AccountsScreen(viewModel) }
         }
     }
 }
@@ -67,18 +73,29 @@ private fun AccountsScreen(
             style = MaterialTheme.typography.displaySmall,
             modifier = Modifier.padding(bottom = 16.dp)
         )
-        LazyColumn {
-            stickyHeader {
-                BankGroup(stringResource(R.string.ca_bank))
+        AnimatedContent(
+            targetState = viewModel.areBanksAvailable,
+            label = "AnimatedBanks"
+        ) { banksAvailable: Boolean ->
+            if (!banksAvailable) Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
             }
-            items(items = viewModel.creditAgricoleBanks) {
-                BankCard(bank = it, viewModel = viewModel)
-            }
-            stickyHeader {
-                BankGroup(stringResource(R.string.other_banks))
-            }
-            items(items = viewModel.otherBanks) {
-                BankCard(bank = it, viewModel = viewModel)
+            else LazyColumn {
+                stickyHeader {
+                    BankGroup(stringResource(R.string.ca_bank))
+                }
+                items(items = viewModel.creditAgricoleBanks) {
+                    BankCard(bank = it, viewModel = viewModel)
+                }
+                stickyHeader {
+                    BankGroup(stringResource(R.string.other_banks))
+                }
+                items(items = viewModel.otherBanks) {
+                    BankCard(bank = it, viewModel = viewModel)
+                }
             }
         }
     }
@@ -114,7 +131,7 @@ private fun BankCard(bank: Bank, viewModel: AccountsViewModel) {
             Row {
                 Text(text = bank.accounts.totalBalanceInEuros)
                 AnimatedContent(
-                    targetState = bank in viewModel.expandedBanks,
+                    targetState = viewModel.isExpanded(bank),
                     label = "AnimatedIcon"
                 ) {
                     val icon: ImageVector =
@@ -129,7 +146,7 @@ private fun BankCard(bank: Bank, viewModel: AccountsViewModel) {
             }
         }
         AnimatedContent(
-            targetState = bank in viewModel.expandedBanks,
+            targetState = viewModel.isExpanded(bank),
             label = "AnimatedCardExpansion"
         ) { isExpanded: Boolean ->
             if (isExpanded) bank.accounts.forEach { AccountCard(it) }
