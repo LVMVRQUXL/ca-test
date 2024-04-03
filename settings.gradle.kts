@@ -22,4 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "CA Test"
 
-include("app")
+include("app", "core")

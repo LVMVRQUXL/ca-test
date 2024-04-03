@@ -8,6 +8,7 @@ junit = "4.13.2"
 junitVersion = "1.1.5"
 kotlin = "1.9.0"
 kotlinx-serialization = "1.5.1"
+kotools-types = "4.5.0"
 lifecycleRuntimeKtx = "2.6.1"
 
 [libraries]
@@ -25,7 +26,10 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin" }
+kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotools-types = { group = "org.kotools", name = "types", version.ref = "kotools-types" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
