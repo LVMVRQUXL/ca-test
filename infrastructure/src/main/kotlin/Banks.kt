@@ -13,8 +13,10 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import lamarque.loic.catest.core.Bank
 import lamarque.loic.catest.core.BankAccount
+import lamarque.loic.catest.core.BankAccountOperation
 import lamarque.loic.catest.core.CreditAgricole
 import lamarque.loic.catest.core.NonCreditAgricoleBank
+import java.util.Date
 
 /** Returns a list of banks retrieved from the server. */
 public suspend fun getBanksFromServer(): List<Bank> =
@@ -49,7 +51,34 @@ private fun BankDto.toBank(): Bank = if (isCA == 1) CreditAgricole(
 ) else NonCreditAgricoleBank(name, accounts.map(AccountDto::toBankAccount))
 
 @Serializable
-internal data class AccountDto(val balance: Double, val label: String)
+internal data class AccountDto(
+    val id: String,
+    val balance: Double,
+    val label: String,
+    val operations: List<OperationDto>
+)
 
-private fun AccountDto.toBankAccount(): BankAccount =
-    BankAccount(title = label, balance)
+private fun AccountDto.toBankAccount(): BankAccount {
+    val operations: List<BankAccountOperation> =
+        operations.map(OperationDto::toBankAccountOperation)
+    return BankAccount(id, title = label, balance, operations)
+}
+
+@Serializable
+internal data class OperationDto(
+    val amount: String,
+    val date: String,
+    val title: String
+)
+
+private fun OperationDto.toBankAccountOperation(): BankAccountOperation {
+    val dateInMilliseconds: Long =
+        if (date.length == 10) date.toLong() * 1000
+        else date.toLong()
+    return BankAccountOperation(
+        description = this.title,
+        date = Date(dateInMilliseconds),
+        amount = this.amount.replace(',', '.')
+            .toDouble()
+    )
+}

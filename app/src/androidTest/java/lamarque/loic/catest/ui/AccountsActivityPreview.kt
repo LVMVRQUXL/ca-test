@@ -21,52 +21,16 @@ private fun AccountsScreenPreview(
     AccountsScreen(accountViewModelPreview(banksAccounts))
 }
 
-
 private fun accountViewModelPreview(
-    bankAccounts: List<BankAccount>
+    accounts: List<BankAccount>
 ): AccountsViewModel = AccountsViewModel(
     initialCreditAgricoleBanks = listOf(
-        CreditAgricole(
-            region = "Languedoc",
-            accounts = bankAccounts
-        ),
-        CreditAgricole(
-            region = "Centre-Est",
-            accounts = listOf(
-                BankAccount(
-                    title = "Compte de dépôt",
-                    balance = 425.84
-                )
-            )
-        )
+        CreditAgricole(region = "Languedoc", accounts),
+        CreditAgricole(region = "Centre-Est", accounts)
     ),
     nonCreditAgricoleBanks = listOf(
-        NonCreditAgricoleBank(
-            name = "Boursorama",
-            accounts = listOf(
-                BankAccount(
-                    title = "Compte de dépôt",
-                    balance = 45.84
-                )
-            )
-        ),
-        NonCreditAgricoleBank(
-            name = "Banque Populaire",
-            accounts = listOf(
-                BankAccount(
-                    title = "Compte joint",
-                    balance = 675.04
-                ),
-                BankAccount(
-                    title = "Compte Chèques",
-                    balance = 675.04
-                ),
-                BankAccount(
-                    title = "Compte de dépôt",
-                    balance = 675.04
-                )
-            )
-        )
+        NonCreditAgricoleBank(name = "Boursorama", accounts),
+        NonCreditAgricoleBank(name = "Banque Populaire", accounts)
     )
 )
 
@@ -76,16 +40,22 @@ class PreviewProviderBankAccounts :
         get() = sequenceOf(
             listOf(
                 BankAccount(
+                    id = "151515151151",
                     title = "Compte joint",
-                    balance = 843.15
+                    balance = 843.15,
+                    operations = emptyList()
                 ),
                 BankAccount(
+                    id = "9892736780987654",
                     title = "Compte Mozaïc",
-                    balance = 209.39
+                    balance = 209.39,
+                    operations = emptyList()
                 ),
                 BankAccount(
+                    id = "2354657678098765",
                     title = "Compte de dépôt",
-                    balance = 2031.84
+                    balance = 2031.84,
+                    operations = emptyList()
                 )
             )
         )

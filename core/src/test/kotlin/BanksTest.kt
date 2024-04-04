@@ -12,8 +12,10 @@ class CreditAgricoleTest {
                 region = "Languedoc",
                 accounts = listOf(
                     BankAccount(
+                        id = "1644784369",
                         title = "Compte joint",
-                        balance = Random.nextDouble()
+                        balance = Random.nextDouble(),
+                        operations = emptyList()
                     )
                 )
             ),
@@ -21,8 +23,10 @@ class CreditAgricoleTest {
                 region = "Centre-Est",
                 accounts = listOf(
                     BankAccount(
+                        id = "1644784369",
                         title = "Compte de dépôt",
-                        balance = Random.nextDouble()
+                        balance = Random.nextDouble(),
+                        operations = emptyList()
                     )
                 )
             )
@@ -43,8 +47,10 @@ class NonCreditAgricoleTest {
                 name = "Boursorama",
                 accounts = listOf(
                     BankAccount(
+                        id = "1644784369",
                         title = "Compte de dépôt",
-                        balance = Random.nextDouble()
+                        balance = Random.nextDouble(),
+                        operations = emptyList()
                     )
                 )
             ),
@@ -52,8 +58,10 @@ class NonCreditAgricoleTest {
                 name = "Banque Populaire",
                 accounts = listOf(
                     BankAccount(
+                        id = "1644784369",
                         title = "Compte joint",
-                        balance = Random.nextDouble()
+                        balance = Random.nextDouble(),
+                        operations = emptyList()
                     )
                 )
             )

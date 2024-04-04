@@ -44,8 +44,8 @@ class AccountsViewModel(
 
     fun fetchBanks() {
         viewModelScope.launch {
-            val banks: List<Bank> = getBanksFromServer()
             delay(2000)
+            val banks: List<Bank> = getBanksFromServer()
             launch {
                 creditAgricoleBanks = banks.filterIsInstance<CreditAgricole>()
                     .let(this@AccountsViewModel::sortCreditAgricoleBanks)

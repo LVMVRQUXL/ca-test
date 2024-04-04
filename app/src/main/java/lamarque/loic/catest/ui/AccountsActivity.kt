@@ -1,5 +1,7 @@
 package lamarque.loic.catest.ui
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -29,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -157,14 +160,23 @@ private fun BankCard(bank: Bank, viewModel: AccountsViewModel) {
 }
 
 @Composable
-private fun AccountCard(account: BankAccount): Unit = Row(
-    modifier = Modifier
-        .fillMaxWidth()
-        .background(MaterialTheme.colorScheme.primaryContainer)
-        .padding(16.dp),
-    verticalAlignment = Alignment.CenterVertically,
-    horizontalArrangement = Arrangement.SpaceBetween
-) {
-    Text(text = account.title)
-    Text(text = account.balanceInEuros)
+private fun AccountCard(account: BankAccount) {
+    val context: Context = LocalContext.current
+    val activity: AccountsActivity = context as AccountsActivity
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.primaryContainer)
+            .padding(16.dp)
+            .clickable {
+                val intent = Intent(context, AccountDetailsActivity::class.java)
+                intent.putExtra("bankAccountId", account.id)
+                activity.startActivity(intent)
+            },
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(text = account.title)
+        Text(text = account.balanceInEuros)
+    }
 }
