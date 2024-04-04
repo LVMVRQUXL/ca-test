@@ -19,7 +19,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.KeyboardArrowDown
-import androidx.compose.material.icons.sharp.KeyboardArrowUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -29,10 +28,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
@@ -59,7 +57,7 @@ class AccountsActivity : ComponentActivity() {
 
 @Composable
 @OptIn(ExperimentalFoundationApi::class)
-private fun AccountsScreen(
+fun AccountsScreen(
     viewModel: AccountsViewModel,
     modifier: Modifier = Modifier
 ): Unit = Surface(
@@ -102,11 +100,17 @@ private fun AccountsScreen(
 }
 
 @Composable
-private fun BankGroup(name: String): Unit = Text(
-    text = name,
-    modifier = Modifier.padding(vertical = 16.dp),
-    style = MaterialTheme.typography.titleMedium
-)
+private fun BankGroup(name: String): Unit = Box(
+    modifier = Modifier
+        .fillMaxWidth()
+        .background(MaterialTheme.colorScheme.background)
+) {
+    Text(
+        text = name,
+        modifier = Modifier.padding(vertical = 16.dp),
+        style = MaterialTheme.typography.titleMedium
+    )
+}
 
 @Composable
 private fun BankCard(bank: Bank, viewModel: AccountsViewModel) {
@@ -130,26 +134,26 @@ private fun BankCard(bank: Bank, viewModel: AccountsViewModel) {
             Text(text = text)
             Row {
                 Text(text = bank.accounts.totalBalanceInEuros)
-                AnimatedContent(
-                    targetState = viewModel.isExpanded(bank),
-                    label = "AnimatedIcon"
-                ) {
-                    val icon: ImageVector =
-                        if (it) Icons.Sharp.KeyboardArrowUp
-                        else Icons.Sharp.KeyboardArrowDown
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = null,
-                        modifier = Modifier.padding(horizontal = 4.dp)
-                    )
-                }
+                val degrees: Float =
+                    if (viewModel.isExpanded(bank)) 180f else 0f
+                Icon(
+                    imageVector = Icons.Sharp.KeyboardArrowDown,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(horizontal = 4.dp)
+                        .rotate(degrees)
+                )
             }
         }
         AnimatedContent(
             targetState = viewModel.isExpanded(bank),
             label = "AnimatedCardExpansion"
         ) { isExpanded: Boolean ->
-            if (isExpanded) bank.accounts.forEach { AccountCard(it) }
+            if (isExpanded) {
+                Column {
+                    bank.accounts.forEach { AccountCard(account = it) }
+                }
+            }
         }
     }
 }
@@ -166,76 +170,3 @@ private fun AccountCard(account: BankAccount): Unit = Row(
     Text(text = account.title)
     Text(text = account.balanceInEuros)
 }
-
-// --------------------------------- Previews ----------------------------------
-
-@Composable
-@Preview(showBackground = true)
-fun AccountsScreenLightPreview(): Unit = CATestTheme(darkTheme = false) {
-    AccountsScreen(accountViewModelPreview())
-}
-
-@Composable
-@Preview(showBackground = true)
-fun AccountsScreenDarkPreview(): Unit = CATestTheme(darkTheme = true) {
-    AccountsScreen(accountViewModelPreview())
-}
-
-private fun accountViewModelPreview(): AccountsViewModel = AccountsViewModel(
-    initialCreditAgricoleBanks = listOf(
-        CreditAgricole(
-            region = "Languedoc",
-            accounts = listOf(
-                BankAccount(
-                    title = "Compte joint",
-                    balance = 843.15
-                ),
-                BankAccount(
-                    title = "Compte Mozaïc",
-                    balance = 209.39
-                ),
-                BankAccount(
-                    title = "Compte de dépôt",
-                    balance = 2031.84
-                )
-            )
-        ),
-        CreditAgricole(
-            region = "Centre-Est",
-            accounts = listOf(
-                BankAccount(
-                    title = "Compte de dépôt",
-                    balance = 425.84
-                )
-            )
-        )
-    ),
-    nonCreditAgricoleBanks = listOf(
-        NonCreditAgricoleBank(
-            name = "Boursorama",
-            accounts = listOf(
-                BankAccount(
-                    title = "Compte de dépôt",
-                    balance = 45.84
-                )
-            )
-        ),
-        NonCreditAgricoleBank(
-            name = "Banque Populaire",
-            accounts = listOf(
-                BankAccount(
-                    title = "Compte joint",
-                    balance = 675.04
-                ),
-                BankAccount(
-                    title = "Compte Chèques",
-                    balance = 675.04
-                ),
-                BankAccount(
-                    title = "Compte de dépôt",
-                    balance = 675.04
-                )
-            )
-        )
-    )
-)
