@@ -1,7 +1,7 @@
 package lamarque.loic.catest.core
 
 /** Represents a bank account. */
-public data class BankAccount(
+public class BankAccount(
     /** The title of this bank account. */
     public val title: String,
     /** The balance available on this bank account. */
