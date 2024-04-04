@@ -7,7 +7,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import lamarque.loic.catest.core.BankAccount
 import lamarque.loic.catest.core.BankAccountOperation
-import lamarque.loic.catest.old.ui.theme.CATestTheme
+import lamarque.loic.catest.ui.theme.CATestTheme
 import java.util.Date
 
 @Composable

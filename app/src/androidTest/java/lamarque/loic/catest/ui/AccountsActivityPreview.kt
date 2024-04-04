@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import lamarque.loic.catest.core.BankAccount
 import lamarque.loic.catest.core.CreditAgricole
 import lamarque.loic.catest.core.NonCreditAgricoleBank
-import lamarque.loic.catest.old.ui.theme.CATestTheme
+import lamarque.loic.catest.ui.theme.CATestTheme
 
 @Composable
 @DevicePreviews

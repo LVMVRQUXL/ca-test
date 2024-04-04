@@ -39,7 +39,7 @@ import lamarque.loic.catest.core.BankAccount
 import lamarque.loic.catest.core.amountInEuros
 import lamarque.loic.catest.core.balanceInEuros
 import lamarque.loic.catest.core.frenchDate
-import lamarque.loic.catest.old.ui.theme.CATestTheme
+import lamarque.loic.catest.ui.theme.CATestTheme
 
 class AccountDetailsActivity : ComponentActivity() {
     private val viewModel: AccountDetailsViewModel by viewModels()

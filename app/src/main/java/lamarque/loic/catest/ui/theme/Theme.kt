@@ -1,4 +1,4 @@
-package lamarque.loic.catest.old.ui.theme
+package lamarque.loic.catest.ui.theme
 
 import android.app.Activity
 import android.os.Build

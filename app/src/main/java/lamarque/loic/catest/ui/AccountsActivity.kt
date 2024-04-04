@@ -44,7 +44,7 @@ import lamarque.loic.catest.core.CreditAgricole
 import lamarque.loic.catest.core.NonCreditAgricoleBank
 import lamarque.loic.catest.core.balanceInEuros
 import lamarque.loic.catest.core.totalBalanceInEuros
-import lamarque.loic.catest.old.ui.theme.CATestTheme
+import lamarque.loic.catest.ui.theme.CATestTheme
 
 class AccountsActivity : ComponentActivity() {
     private val viewModel: AccountsViewModel by viewModels<AccountsViewModel>()
