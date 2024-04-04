@@ -149,10 +149,8 @@ private fun BankCard(bank: Bank, viewModel: AccountsViewModel) {
             targetState = viewModel.isExpanded(bank),
             label = "AnimatedCardExpansion"
         ) { isExpanded: Boolean ->
-            if (isExpanded) {
-                Column {
-                    bank.accounts.forEach { AccountCard(account = it) }
-                }
+            if (isExpanded) Column {
+                bank.accounts.forEach { AccountCard(account = it) }
             }
         }
     }
