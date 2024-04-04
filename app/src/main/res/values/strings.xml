@@ -3,4 +3,6 @@
     <string name="my_accounts">Mes Comptes</string>
     <string name="ca_bank">Crédit Agricole</string>
     <string name="other_banks">Autres Banques</string>
+    <string name="retry">Réessayer</string>
+    <string name="fetching_error">Erreur de chargement</string>
 </resources>
